@@ -41,7 +41,7 @@ export default {
                 // this.$store.commit('setDogImages', [...images, randomImage]);
                 const images=await DogService.getDogImages();
                 this.dogImages=images.data.message
-                console.log(images.data.message)
+                console.log(images.data)
             } catch (error) {
                 console.error('Error fetching dog images:', error);
             }
@@ -49,24 +49,5 @@ export default {
     },
 };
 </script>
-  
-<style>
-.card-columns {
-    column-count: 4;
-}
-
-.card {
-    margin-bottom: 20px;
-}
-.image{
-    width:100px;
-    height:100px;
-}
-
-.card-img-top {
-    width: 100%;
-    height: auto;
-}
-</style>
   
    
