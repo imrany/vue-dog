@@ -7,7 +7,7 @@
         <div class="mt-10 grid grid-cols-3 gap-y-2 gap-x-4 mx-20">
             <div class="" v-for="(image,index) in dogImages" :key="index">
                 <router-link to="/dog/1">
-                    <img v-lazy="{ src: image, loading: loadingImage, error: loadingImage }" :src="image" class="h-[300px] w-[380px]" alt="Dog">
+                    <img v-lazy="{ src: image, loading: loadingImage, error: loadingImage }" :src="image" class="h-[300px] w-[380px]" alt="Dog" title="View more about this breed">
                 </router-link>
             </div>
         </div>
