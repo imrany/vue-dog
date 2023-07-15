@@ -6,8 +6,8 @@
             </div>
             <div class="col-12">
                 <div class="card-columns">
-                    <div class="card col-lg-3 col-md-4 col-sm-6" v-for="image in dogImages" :key="image">
-                        <img v-lazy="image" class="card-img-top" alt="Dog">
+                    <div class="card col-lg-3 col-md-4 col-sm-6" v-for="(image,index) in dogImages" :key="index">
+                        <img v-lazy="image" :src="image" class="image" alt="Dog">
                     </div>
                 </div>
             </div>
@@ -20,6 +20,11 @@ import { mapGetters } from 'vuex';
 import DogService from '../services/DogService';
 
 export default {
+    data(){
+        return {
+            dogImages:[]
+        };
+    },
     computed: {
         ...mapGetters(['getDogImages']),
     },
@@ -29,11 +34,14 @@ export default {
     methods: {
         async fetchDogImages() {
             try {
-                const breeds = await DogService.getBreeds();
-                const randomBreed = Object.keys(breeds)[0]; // Fetch images for the first breed in the list
-                const randomImage = await DogService.getRandomImageByBreed(randomBreed);
-                const images = await DogService.getImagesByBreed(randomBreed);
-                this.$store.commit('setDogImages', [...images, randomImage]);
+                // const breeds = await DogService.getBreeds();
+                // const randomBreed = Object.keys(breeds)[0]; // Fetch images for the first breed in the list
+                // const randomImage = await DogService.getRandomImageByBreed(randomBreed);
+                // const images = await DogService.getImagesByBreed(randomBreed);
+                // this.$store.commit('setDogImages', [...images, randomImage]);
+                const images=await DogService.getDogImages();
+                this.dogImages=images.data.message
+                console.log(images.data.message)
             } catch (error) {
                 console.error('Error fetching dog images:', error);
             }
@@ -49,6 +57,10 @@ export default {
 
 .card {
     margin-bottom: 20px;
+}
+.image{
+    width:100px;
+    height:100px;
 }
 
 .card-img-top {
