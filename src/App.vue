@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="flex flex-col items-center justify-center">
     <header>
       <!-- Header content -->
     </header>
@@ -17,11 +17,3 @@ export default {
   name: 'App',
 }
 </script>
-
-<style>
-#app {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-</style>
