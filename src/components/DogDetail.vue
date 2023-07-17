@@ -45,18 +45,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.container {
-  margin-top: 2rem;
-}
-
-.col-12:not(:last-child) {
-  margin-bottom: 1rem;
-}
-
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-</style>

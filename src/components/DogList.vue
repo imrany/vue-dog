@@ -2,7 +2,7 @@
     <div class="my-10">
         <div class="flex flex-col items-center justify-center">
              <h1 class="text-center mb-4 text-5xl font-semibold">Dog Images</h1>
-            <input type="text" name="search" id="search" placeholder="Search for a dog / breed" class="py-2 border-gray-500 rounded-[8px] placeholder:text-black focus:outline-orange-900 border-[1px] px-4 w-[50vw]"/>
+            <input type="text" @change="searchBreed" name="search" id="search" placeholder="Search for a dog / breed" class="py-2 border-gray-500 rounded-[8px] placeholder:text-black focus:outline-orange-900 border-[1px] px-4 w-[50vw]"/>
         </div>
         <div class="mt-10 grid grid-cols-3 gap-y-2 gap-x-4 mx-20">
             <div class="" v-for="(image,index) in dogImages" :key="index">
@@ -47,6 +47,16 @@ export default {
                 console.error('Error fetching dog images:', error);
             }
         },
+        async searchBreed(e){
+            try {
+                const breed=await getImagesByBreed(e.target.value);
+                this.dogImages=breed
+                console.log(breed)
+            } catch (error) {
+                console.error('Error fetching dog images:', error);
+            }
+        }
+
     },
 };
 </script>
