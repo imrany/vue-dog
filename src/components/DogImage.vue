@@ -1,13 +1,13 @@
-<script>
+<script lang="ts" setup>
+const props=defineProps<{
+    image:string
+}>()
 import { AdvancedImage } from '@cloudinary/vue';
 import { Cloudinary } from '@cloudinary/url-gen';
 import {Transformation} from '@cloudinary/url-gen';
 
 // Import required actions.
-import {thumbnail, scale} from "@cloudinary/url-gen/actions/resize";
 import {sepia} from "@cloudinary/url-gen/actions/effect";
-import {source} from "@cloudinary/url-gen/actions/overlay";
-import {opacity,brightness} from "@cloudinary/url-gen/actions/adjust";
 
 import FilterButtons from "./FilterButtons.vue"
 
@@ -18,28 +18,17 @@ const cld = new Cloudinary({
     }
 })
 // Instantiate a CloudinaryImage object for the image with the public ID, 'front_face'.
-const myImg = cld.image('front_face');
+// const myImg = cld.image(props.image);
+const myImg = cld.image('https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png').setDeliveryType('fetch');
 // Apply the transformation.
 myImg.effect(sepia()).format('png')
-
-export default {
-    props: ['image'],
-    components:{
-        // FilterButtons
-        AdvancedImage
-    },
-    data() {
-        return {
-            myImg,
-        }
-    }
-}
+console.log(props.image)
 </script>
 
 <template>
     <div class="flex flex-col h-[100vh] justify-center items-center">
         <div class="flex">
-            <img :src="image" alt="Dog Image" class="max-w-[500px] max-h-[500px]">
+            <img :src="image" :alt="image" class="max-w-[500px] max-h-[500px]">
             <AdvancedImage :cldImg="myImg"/>
             <!-- <FilterButtons/> -->
             <div class="ml-6 flex flex-col">
