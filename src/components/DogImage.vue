@@ -14,12 +14,12 @@ import FilterButtons from "./FilterButtons.vue"
 // Create a Cloudinary instance and set your cloud name.
 const cld = new Cloudinary({
     cloud: {
-        cloudName: 'demo',
-    }
+        cloudName: "ijayabby",
+    },
 })
 // Instantiate a CloudinaryImage object for the image with the public ID, 'front_face'.
 // const myImg = cld.image(props.image);
-const myImg = cld.image('https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png').setDeliveryType('fetch');
+const myImg = cld.image(props.image);
 // Apply the transformation.
 myImg.effect(sepia()).format('png')
 console.log(props.image)
