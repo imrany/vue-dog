@@ -1,25 +1,25 @@
 <script lang="ts" setup>
 const props=defineProps<{
-    image:string
+    image:string,
+    // https://res.cloudinary.com/ijayabby/image/upload/v1690145534/
 }>()
 import { AdvancedImage } from '@cloudinary/vue';
 import { Cloudinary } from '@cloudinary/url-gen';
 import {Transformation} from '@cloudinary/url-gen';
 
-// Import required actions.
 import {sepia} from "@cloudinary/url-gen/actions/effect";
 
 import FilterButtons from "./FilterButtons.vue"
 
-// Create a Cloudinary instance and set your cloud name.
 const cld = new Cloudinary({
     cloud: {
-        cloudName: 'demo',
-    }
+        cloudName: "ijayabby",
+    },
 })
-// Instantiate a CloudinaryImage object for the image with the public ID, 'front_face'.
-// const myImg = cld.image(props.image);
-const myImg = cld.image('https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png').setDeliveryType('fetch');
+const public_id=props.image.slice(61,props.image.length)
+console.log(public_id);
+
+const myImg = cld.image(public_id);
 // Apply the transformation.
 myImg.effect(sepia()).format('png')
 console.log(props.image)
