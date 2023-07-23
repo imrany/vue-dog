@@ -1,47 +1,13 @@
 <template>
-  <div class="container my-4">
-    <div class="row">
-      <div class="col-12">
-        <h2>{{ dogDetails.name }}</h2>
-        <p><strong>Breed:</strong> {{ dogDetails.breed }}</p>
-        <p><strong>Size:</strong> {{ dogDetails.size }}</p>
-        <p><strong>Temperament:</strong> {{ dogDetails.temperament }}</p>
-      </div>
-      <div class="col-12">
-        <FilterButtons @apply-filter="applyFilter" />
-      </div>
-      <div class="col-12">
-        <img v-if="transformedImage" :src="transformedImage" class="img-fluid" alt="Transformed Dog">
-      </div>
-    </div>
+  <div>
+    <h1>Dog Details: {{ breed }}</h1>
+    <!-- Add your code to display the dog details and apply filters here -->
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import FilterButtons from './FilterButtons.vue'
 
 export default {
-  components: {
-    FilterButtons
-  },
-  computed: {
-    ...mapGetters(['getDogDetails', 'isLoading'])
-  },
-  data() {
-    return {
-      transformedImage: null
-    }
-  },
-  methods: {
-    applyFilter(filterType) {
-      // Apply the selected filter to the dog image and update the transformedImage data
-      // using Cloudinary or a similar service
-    }
-  },
-  created() {
-    const breed = this.$route.params.breed
-    this.$store.dispatch('fetchDogDetails', breed)
-  }
+  props: ['breed']
 }
 </script>
