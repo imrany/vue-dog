@@ -1,23 +1,12 @@
 <template>
-    <div class="container my-4">
-        <div class="row">
-            <div class="col-12">
-                <h3 class="mb-3">Image Filters</h3>
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-outline-primary" @click="applyFilter('cartoonify')">
-                        Cartoonify
-                    </button>
-                    <button type="button" class="btn btn-outline-primary" @click="applyFilter('grayscale')">
-                        Grayscale
-                    </button>
-                    <button type="button" class="btn btn-outline-primary" @click="applyFilter('sepia')">
-                        Sepia
-                    </button>
-                </div>
-            </div>
-        </div>
+    <div class="ml-6 flex flex-col">
+        <p class="text-xl mb-4">Apply filters</p>
+        <button class="w-[100px] h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white">Cartoonify</button>
+        <button class="w-[100px] my-4 h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white">Grayscale</button>
+        <button class="w-[100px] h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white">Sepia</button>
     </div>
 </template>
+
 <script>
 export default {
     methods: {
@@ -28,15 +17,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-.container {
-    margin-top: 2rem;
-}
-
-.col-12:not(:last-child) {
-    margin-bottom: 1rem;
-}
-</style>
-
-  
