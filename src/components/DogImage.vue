@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 const props=defineProps<{
     image:string,
-    // https://res.cloudinary.com/ijayabby/image/upload/v1690145534/
 }>()
 import { AdvancedImage } from '@cloudinary/vue';
 import { Cloudinary } from '@cloudinary/url-gen';
@@ -24,18 +23,26 @@ const myImg = cld.image(public_id);
 const gray=ref(false)
 const cartoon=ref(false)
 const sep=ref(false)
+const origin=ref(true)
 
 const sepia_show=()=>{
     myImg.effect(sepia()).format('png')
     sep.value=true
+    origin.value=false
 }
 const grayscale_show=()=>{
     myImg.effect(grayscale()).format('png')
     gray.value=true
+    cartoon.value=false
+    sep.value=false
+    origin.value=false
 }
 const cartoonify_show=()=>{
     myImg.effect(cartoonify()).format('png')
     cartoon.value=true
+    sep.value=false
+    gray.value=false
+    origin.value=false
 }
 
 </script>
@@ -46,7 +53,7 @@ const cartoonify_show=()=>{
             <AdvancedImage :cldImg="myImg" class="max-w-[500px] max-h-[500px]" v-if="gray"/>
             <AdvancedImage :cldImg="myImg" class="max-w-[500px] max-h-[500px]" v-if="cartoon"/>
             <AdvancedImage :cldImg="myImg" class="max-w-[500px] max-h-[500px]" v-if="sep"/>
-            <img :src="image" :alt="image" class="max-w-[500px] max-h-[500px]" v-else>
+            <img :src="image" :alt="image" class="max-w-[500px] max-h-[500px]" v-if="origin">
             <!-- <FilterButtons/> -->
             <div class="ml-6 flex flex-col">
                 <p class="text-xl mb-4">Apply filters</p>
