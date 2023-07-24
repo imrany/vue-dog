@@ -46,6 +46,13 @@ const cartoonify_show=()=>{
     gray.value=false
     origin.value=false
 }
+const origin_show=()=>{
+    myImg.effect(cartoonify()).format('png')
+    origin.value=true
+    cartoon.value=false
+    sep.value=false
+    gray.value=false
+}
 
 </script>
 
@@ -62,6 +69,7 @@ const cartoonify_show=()=>{
                 <button class="w-[100px] h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white" @click="cartoonify_show">Cartoonify</button>
                 <button class="w-[100px] my-4 h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white" @click="grayscale_show">Grayscale</button>
                 <button class="w-[100px] h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white" @click="sepia_show">Sepia</button>
+                <button class="w-[100px] my-4 h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white" @click="origin_show">Reset</button>
             </div>
         </div>
         <!-- Add your code to display more details about the dog image here -->
