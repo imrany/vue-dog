@@ -28,6 +28,8 @@ const origin=ref(true)
 const sepia_show=()=>{
     myImg.effect(sepia()).format('png')
     sep.value=true
+    gray.value=false
+    cartoon.value=false
     origin.value=false
 }
 const grayscale_show=()=>{
