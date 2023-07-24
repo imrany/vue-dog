@@ -7,9 +7,10 @@ import { AdvancedImage } from '@cloudinary/vue';
 import { Cloudinary } from '@cloudinary/url-gen';
 import {Transformation} from '@cloudinary/url-gen';
 
-import {sepia} from "@cloudinary/url-gen/actions/effect";
+import {sepia, cartoonify, grayscale} from "@cloudinary/url-gen/actions/effect";
 
 import FilterButtons from "./FilterButtons.vue"
+import { ref } from 'vue';
 
 const cld = new Cloudinary({
     cloud: {
@@ -17,25 +18,41 @@ const cld = new Cloudinary({
     },
 })
 const public_id=props.image.slice(61,props.image.length)
-console.log(public_id);
-
 const myImg = cld.image(public_id);
 // Apply the transformation.
-myImg.effect(sepia()).format('png')
-console.log(props.image)
+
+const gray=ref(false)
+const cartoon=ref(false)
+const sep=ref(false)
+
+const sepia_show=()=>{
+    myImg.effect(sepia()).format('png')
+    sep.value=true
+}
+const grayscale_show=()=>{
+    myImg.effect(grayscale()).format('png')
+    gray.value=true
+}
+const cartoonify_show=()=>{
+    myImg.effect(cartoonify()).format('png')
+    cartoon.value=true
+}
+
 </script>
 
 <template>
     <div class="flex flex-col h-[100vh] justify-center items-center">
         <div class="flex">
-            <img :src="image" :alt="image" class="max-w-[500px] max-h-[500px]">
-            <AdvancedImage :cldImg="myImg"/>
+            <AdvancedImage :cldImg="myImg" class="max-w-[500px] max-h-[500px]" v-if="gray"/>
+            <AdvancedImage :cldImg="myImg" class="max-w-[500px] max-h-[500px]" v-if="cartoon"/>
+            <AdvancedImage :cldImg="myImg" class="max-w-[500px] max-h-[500px]" v-if="sep"/>
+            <img :src="image" :alt="image" class="max-w-[500px] max-h-[500px]" v-else>
             <!-- <FilterButtons/> -->
             <div class="ml-6 flex flex-col">
                 <p class="text-xl mb-4">Apply filters</p>
-                <button class="w-[100px] h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white">Cartoonify</button>
-                <button class="w-[100px] my-4 h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white">Grayscale</button>
-                <button class="w-[100px] h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white">Sepia</button>
+                <button class="w-[100px] h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white" @click="cartoonify_show">Cartoonify</button>
+                <button class="w-[100px] my-4 h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white" @click="grayscale_show">Grayscale</button>
+                <button class="w-[100px] h-[40px] flex justify-center items-center rounded-[10px] bg-black text-white" @click="sepia_show">Sepia</button>
             </div>
         </div>
         <!-- Add your code to display more details about the dog image here -->
